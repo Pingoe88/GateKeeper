@@ -20,3 +20,5 @@ func main() {
 		fmt.Println("Sorry, de parkeerplaats is 's nachts gesloten. The current time is:")
 	}
 }
+
+//V2
