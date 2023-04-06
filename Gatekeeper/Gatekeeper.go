@@ -23,22 +23,22 @@ func checkName(kenteken string) bool {
 }
 
 // Functie voor het begroeten van de bezoeker op basis van het tijdstip.
-func greetVisitor(welkomStr string) {
+func greetVisitor(welkomStr string) string {
 	currentTime := time.Now().Format("15:04") // Vind de huidige tijd en zet het in uur:minuut formaat.
 
 	if currentTime >= "07:00" && currentTime <= "12:00" {
-		fmt.Println("Goedemorgen!:", welkomStr)
+		return fmt.Sprintf("Goedemorgen! %s", welkomStr)
 	} else if currentTime > "12:00" && currentTime <= "18:00" {
-		fmt.Println("Goedemiddag:", welkomStr)
+		return fmt.Sprintf("Goedemiddag: %s", welkomStr)
 	} else if currentTime > "18:00" && currentTime <= "23:00" {
-		fmt.Println("Goedenavond:", welkomStr)
+		return fmt.Sprintf("Goedenavond: %s", welkomStr)
 	} else {
-		fmt.Println("Sorry, de parkeerplaats is 's nachts gesloten.")
+		return "Sorry, de parkeerplaats is 's nachts gesloten."
 	}
 }
 
 // Functie voor het verwerken van de input van de gebruiker en het uitvoeren van de begroeting.
-func processInput() {
+func processInput() string {
 	welkomStr := "Welkom bij Fonteyn Vakantieparken"
 
 	fmt.Print("Voer je kenteken in: ")
@@ -47,12 +47,12 @@ func processInput() {
 	kenteken = strings.TrimSpace(kenteken) // Verwijder eventuele extra spaties voor of na het kenteken.
 
 	if checkName(kenteken) {
-		greetVisitor(welkomStr)
+		return greetVisitor(welkomStr)
 	} else {
-		fmt.Println("U heeft helaas geen toegang tot het parkeerterrein.")
+		return "U heeft helaas geen toegang tot het parkeerterrein."
 	}
 }
 
 func main() {
-	processInput()
+	fmt.Println(processInput())
 }
