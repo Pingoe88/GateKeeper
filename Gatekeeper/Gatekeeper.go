@@ -22,9 +22,24 @@ func checkName(kenteken string) bool {
 	return false // Kenteken is niet toegestaan.
 }
 
-func main() {
-	welkomStr := "Welkom bij Fonteyn Vakantieparken"
+// Functie voor het begroeten van de bezoeker op basis van het tijdstip.
+func greetVisitor(welkomStr string) {
 	currentTime := time.Now().Format("15:04") // Vind de huidige tijd en zet het in uur:minuut formaat.
+
+	if currentTime >= "07:00" && currentTime <= "12:00" {
+		fmt.Println("Goedemorgen!:", welkomStr)
+	} else if currentTime > "12:00" && currentTime <= "18:00" {
+		fmt.Println("Goedemiddag:", welkomStr)
+	} else if currentTime > "18:00" && currentTime <= "23:00" {
+		fmt.Println("Goedenavond:", welkomStr)
+	} else {
+		fmt.Println("Sorry, de parkeerplaats is 's nachts gesloten.")
+	}
+}
+
+// Functie voor het verwerken van de input van de gebruiker en het uitvoeren van de begroeting.
+func processInput() {
+	welkomStr := "Welkom bij Fonteyn Vakantieparken"
 
 	fmt.Print("Voer je kenteken in: ")
 	reader := bufio.NewReader(os.Stdin)    // Maak een nieuwe reader aan voor input van de gebruiker.
@@ -32,16 +47,12 @@ func main() {
 	kenteken = strings.TrimSpace(kenteken) // Verwijder eventuele extra spaties voor of na het kenteken.
 
 	if checkName(kenteken) {
-		if currentTime >= "07:00" && currentTime <= "12:00" {
-			fmt.Println("Goedemorgen!:", welkomStr)
-		} else if currentTime > "12:00" && currentTime <= "18:00" {
-			fmt.Println("Goedemiddag:", welkomStr)
-		} else if currentTime > "18:00" && currentTime <= "23:00" {
-			fmt.Println("Goedenavond:", welkomStr)
-		} else {
-			fmt.Println("Sorry, de parkeerplaats is 's nachts gesloten.")
-		}
+		greetVisitor(welkomStr)
 	} else {
 		fmt.Println("U heeft helaas geen toegang tot het parkeerterrein.")
 	}
+}
+
+func main() {
+	processInput()
 }
